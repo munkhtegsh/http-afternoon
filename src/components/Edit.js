@@ -3,9 +3,8 @@ import ConfirmModal from './subcomponents/ConfirmModal';
 
 // import axios
 
-
 class Edit extends Component {
-    constructor(){
+        constructor(){
         super();
         this.state = {
             title: '',
