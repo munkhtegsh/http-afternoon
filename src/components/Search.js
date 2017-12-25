@@ -18,7 +18,8 @@ class Search extends Component{
     // insert search method
     search(event) {
         event.preventDefault();
-        Axios.get(`/api/${this.state.searchType}?q=${searchTerm}}`)
+        const { searchTerm, searchType} = this.state;
+        Axios.get(`/api/${this.state.searchType}?q=${this.state.searchTerm}}`)
         .then(res => {
             if(this.state.searchType === 'blogs') {
                 this.props.history.push(makeQuery('/search?',{q:searchTerm,type:searchType}))
@@ -28,17 +29,17 @@ class Search extends Component{
                 this.setState({userResults: res.data});
             }
         }).catch(error => console.log(error));
-    }
+    } 
     
     
     render(){
         // map over the blogResults and userResults here, replace the empty arrays.
         const blogResults = this.state.blogResults.map((blog, i) => {
-            <BlogTitle key={i} blog={blog} />
+            return <BlogTile key={i} blog={blog} />
         });
 
         const userResults = this.state.userResults.map((user, i) => {
-            <UserTile key={i} user={user} />
+            return <UserTile key={i} user={user} />
         });
 
 

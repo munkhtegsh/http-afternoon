@@ -17,16 +17,10 @@ class Blog extends Component{
     componentWillMount() {
         Axios.get(`/api/blog/${this.props.match.params}`)
         .then(res => {
-            this.setState({
-                blog: res.data
-            })
-            console.log(res)
-        }).match(error => {
-            console.log(error)
-        });
-    }
+            this.props.history.push(`/blog/${res.data.id}`)
+        }).catch(error => console.log(error));
+    };
 
-    
     render(){
         const blog = this.state.blog;
         return(

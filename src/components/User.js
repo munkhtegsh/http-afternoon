@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import BlogTile from './subcomponents/BlogTile';
 
 // import axios
+import axios from 'axios';
 
 class User extends Component{
     constructor(){
@@ -15,6 +16,27 @@ class User extends Component{
     }
 
     // insert componentWillMount
+    componentWillMount() {
+        axios.get(`/api/user/${this.props.match.params.id}`)
+        .get(res => {
+            console.log(res)
+            this.setState({
+                user: res.data
+            })
+        }).catch(error => console.log(error));
+
+        axios.get(`/api/blogs/${this.props.match.params.id}`)
+        .then(res => {
+            this.setState({
+                posts: res.data
+            })
+        }).catch(error => console.log(error));
+
+        // axios.all([getUserAccount(), getUserPermissions()])
+        // .then(axios.spread(function (acct, perms) {
+        //     // Both requests are now complete
+        // }));
+    }
     
 
     render(){

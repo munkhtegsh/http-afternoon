@@ -30,11 +30,9 @@ class Add extends Component {
 
         Axios.post('api/blogs', body)
         .then(res => {
-            this.props.history.push(`/blog/${result.data.id}`);
-        })
-        .catch(error => console.log(error));
-    }
-    
+            this.props.history.push(`/blog/${res.data.id}`);
+        }).catch(error => console.log(error));
+    };
     
     render() {
         let {title, subTitle, image, text} = this.state;
